@@ -1,0 +1,51 @@
+#!/bin/bash
+
+#export GS_LIB=/usr/local/texlive/texmf-local/fonts
+
+basename=$1 #引数からファイル名を受け取る
+filename=${basename%.*} #拡張子をとった名前
+pdfflag=1
+dviflag=1
+
+rm ${filename}.aux
+rm ${filename}.d   rm ${filename}.toc
+rm ${filename}.bbl
+rm ${filename}.blg
+rm ${filename}.log
+
+
+
+if [ -a ${filename}.tex ]; then
+#tex->dviファイル
+pbibtex --kanji=utf8 ${filename}
+platex  --kanji=utf8 ${filename}.tex
+pbibtex --kanji=utf8 ${filename}.aux
+platex  --kanji=utf8 ${filename}.tex
+platex  --kanji=utf8 ${filename}.tex
+else
+echo "ファイル:${filename}.texが存在しません"
+dviflag=0
+pdfflag=0
+fi
+
+if [ -a ${filename}.dvi ]; then   #dvi->pdfファイル
+dvipdfmx  ${filename}.dvi
+elif [ $dviflag != 0 ]; then
+echo "${filename}.dviが作成できていないようです"
+pdfflag=0
+fi
+
+if [ -a ${filename}.pdf ]; then
+#pdfファイルを開く
+open ${filename}.pdf
+rm ${filename}.aux
+rm ${filename}.dvi
+rm ${filename}.toc
+rm ${filename}.bbl
+rm ${filename}.blg
+rm ${filename}.log
+
+
+elif [ $pdfflag!=0 ] ;then
+echo "${filename}.pdfが開けません"
+fi
