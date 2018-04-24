@@ -54,6 +54,9 @@
 \begin{document}
 \maketitle \thispagestyle{empty}
 \section{周期境界条件PBCとは}
+単位セルを連続すると考えることで、有限大きさの１つセル（基本セル）の中にのみに粒子や計算対象の物体を実体化させるにも関わらず、
+無限サイズの系を模倣することができる条件（モデル）のことを周期境界条件という(イメージ図\ref{fig:pbc})。
+3 次元の場合、最も簡単なものは一辺の長さが $L$ の立方体を基本セルとし、そのまわりに同じサイズをもち基本セルの内容の虚像をもつイメージセルを考えるものだろう。
 \begin{figure}[htbp]
    \begin{center}
    \includegraphics[,width=0.5\textwidth]{fig/pbc.eps}
@@ -64,9 +67,12 @@
    }
 \end{figure}
 
-\subsection{点を移動させる処理}
-
-\subsection{近接点を取得する処理}
+任意次元の周期境界では、$i$ 番目の粒子を
+\begin{eqnarray}
+   \vector{p}_i = \vector{p}_i+\vector{L_1} = \vector{p}_i+\vector{L_2} = \ldots
+\end{eqnarray}
+のように粒子の位置を考える。
+$\{\vector{L}\}$ は線型独立なベクトルであり、それぞれ$L$ の整数倍のスカラーを要素にもつ。
 
 \end{document}
 
