@@ -64,7 +64,7 @@ void output_structure(const std::string& file_name, const int& step, const std::
    ofs<<"# Bead "<<step<<std::endl; 
    for(size_t ips=0,ips_size=ps.size();ips<ips_size;++ips)
    {
-      ofs<<ips<<" "<<ps.at(ips)<<std::endl;;
+      ofs<<ips<<" "<<ps.at(ips)<<std::endl;
    }
    ofs<<std::endl;
    ofs.close();
