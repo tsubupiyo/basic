@@ -12,15 +12,18 @@ constexpr int    OUT_FREQ      = 10;			/*出力頻度*/
 constexpr int    SEED          = 140838812;		/*シード*/
 constexpr int    NUM_PARTICLES = 10;			/*粒子数*/
 constexpr double CELL_LENGTH   = 10;			/*セルの長さ*/	 
+constexpr double EPSILON_LJ    = 1.0;
 std::mt19937 mt(SEED);
 
 void output_structure(const std::string& file_name, const int& step, const std::vector<Vector3D>& ps);
 
 void pbc(Vector3D& point);
 
-std::vector<Vector3D> cell_all()
+std::vector<Vector3D> cell_all();
 
-std::vector<Vector3D> cellb = cell_all()
+std::vector<Vector3D> cellb = cell_all();
+
+double LJ(const Vector3D& pa, const Vector3D& pb);
 
 int main()
 {
@@ -133,4 +136,11 @@ Vector3D pbc_call(const Vector3D& pi, const Vector3D& pj)
 		}
 	}
 	return result;
+
+}
+
+double LJ(const Vector3D& pa, const Vector3D& pb)
+{
+	const double dis = (pa-pb).norm();
+	return 4 * EPSILON_LJ * (std::pow(dis, 12.0) - std::pow(dis, 6.0));
 }
