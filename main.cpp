@@ -1,4 +1,4 @@
-//粒子N個の座標を動かす(周期境界条件)
+//粒子N個の座標を動かす
 #include <iostream>
 #include <cmath>
 #include <vector>
@@ -96,6 +96,7 @@ void pbc(Vector3D& point)
 	if(point.z <= 0){point.z += CELL_LENGTH;}	
 }
 
+//基本セル及びイメージセル
 std::vector<Vector3D> cell_all()
 {
 	Vector3D diff;
@@ -139,6 +140,7 @@ Vector3D pbc_call(const Vector3D& pi, const Vector3D& pj)
 
 }
 
+//LJポテンシャル
 double LJ(const Vector3D& pa, const Vector3D& pb)
 {
 	const double dis = (pa-pb).norm();
